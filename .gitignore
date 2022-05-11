@@ -1,0 +1,5 @@
+bank/
+db/
+initdb.d/
+log/
+*.log

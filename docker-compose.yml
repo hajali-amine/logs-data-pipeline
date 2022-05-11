@@ -50,9 +50,9 @@ services:
       net_pet:
         ipv4_address: 172.27.1.10
      
-  spark-worker:
+  spark-worker_1:
     image: bde2020/spark-worker:2.4.0-hadoop2.7
-    container_name: spark-worker
+    container_name: spark-worker-1
     depends_on:
       - spark-master
     environment:
@@ -88,10 +88,31 @@ services:
       net_pet:
         ipv4_address: 172.27.1.16 
 
+  mongo:
+    image: mongo:4.4
+    container_name: mongo-db
+    restart: unless-stopped
+    ports:
+      - 26000:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=cqrs
+      - MONGO_DB_USERNAME=user
+      - MONGO_DB_PASSWORD=user
+    volumes:
+      - ./db/mongo/data:/data/db/
+      - ./log/mongo/logs:/var/log/mongodb/
+      - ./initdb.d:/docker-entrypoint-initdb.d/
+    networks:
+      net_pet:
+        ipv4_address: 172.27.1.17
+
+
 
 networks:
   net_pet:
     ipam:
       driver: default
       config:
-        - subnet: 172.27.0.0/16
+        - subnet: 172.27.0.0/16      
