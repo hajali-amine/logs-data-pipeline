@@ -2,4 +2,5 @@ bank/
 db/
 initdb.d/
 log/
+venv/
 *.log
