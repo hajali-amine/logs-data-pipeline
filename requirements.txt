@@ -1,2 +1,5 @@
-install==1.3.5
-kafka-python==2.0.2
+bson
+pymongo
+pyspark
+kafka-python
+pandas
