@@ -25,7 +25,5 @@ import pyspark.sql.functions
 sc = SparkContext()
 #rdd = sc.textFile("logfiles.log").map(lambda line: line.split(" ")).filter(lambda line: len(line)<=1).collect()
 #print(rdd)
-lines  = sc.textFile("logs.log")
+lines  = sc.textFile("log.log")
 line_lengths = lines.map(lambda x: len(x))
-document_length = line_lengths.reduce(lambda x,y: x+y)
-print(document_length)

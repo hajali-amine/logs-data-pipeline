@@ -15,17 +15,9 @@
 #for msg in consumer:
 #    print (msg.value)
 
-
-
-
 from pyspark import SparkContext
-import csv
-
-import pyspark.sql.functions
 sc = SparkContext()
-#rdd = sc.textFile("logfiles.log").map(lambda line: line.split(" ")).filter(lambda line: len(line)<=1).collect()
-#print(rdd)
-lines  = sc.textFile("logs.log")
-line_lengths = lines.map(lambda x: len(x))
-document_length = line_lengths.reduce(lambda x,y: x+y)
-print(document_length)
+ma_liste = range(10000)
+rdd = sc.parallelize(ma_liste, 2)
+nombres_impairs = rdd.filter(lambda x: x % 2 != 0)
+nombres_impairs.take(5)
