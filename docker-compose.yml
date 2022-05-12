@@ -1,6 +1,6 @@
 # https://itnext.io/creating-a-big-data-development-platform-using-docker-compose-892f7f4da738
 
-version: '3' 
+version: '3.2' 
 services:
 
   namenode:
@@ -14,6 +14,7 @@ services:
       - ./hadoop.env
     ports:
       - "50070:50070"
+      - "8020:8020"
     networks:
       net_pet:
         ipv4_address: 172.27.1.5
@@ -36,35 +37,32 @@ services:
       net_pet:
         ipv4_address: 172.27.1.6
 
-  spark-master:
-    image: bde2020/spark-master:2.4.0-hadoop2.7
-    container_name: spark-master
-    ports:
-      - 8080:8080
-      - 7077:7077
+  spark:
+    image: docker.io/bitnami/spark:3
     environment:
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-    env_file:
-      - ./hadoop.env
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - '8080:8080'
+      - '7077:7077'
     networks:
       net_pet:
         ipv4_address: 172.27.1.10
-     
-  spark-worker_1:
-    image: bde2020/spark-worker:2.4.0-hadoop2.7
-    container_name: spark-worker-1
-    depends_on:
-      - spark-master
+
+  spark-worker:
+    image: docker.io/bitnami/spark:3
     environment:
-      - SPARK_MASTER=spark://spark-master:7077
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-      - HIVE_CORE_CONF_javax_jdo_option_ConnectionURL=jdbc:postgresql://hive-metastore/metastore
-    depends_on:
-      - spark-master
-    ports:
-      - 8081:8081
-    env_file:
-      - ./hadoop.env
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
     networks:
       net_pet:
         ipv4_address: 172.27.1.11
@@ -107,8 +105,6 @@ services:
     networks:
       net_pet:
         ipv4_address: 172.27.1.17
-
-
 
 networks:
   net_pet:

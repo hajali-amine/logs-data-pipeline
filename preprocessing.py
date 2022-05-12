@@ -18,14 +18,11 @@
 
 
 
-from pyspark import SparkContext
-import csv
-
-import pyspark.sql.functions
-sc = SparkContext()
-#rdd = sc.textFile("logfiles.log").map(lambda line: line.split(" ")).filter(lambda line: len(line)<=1).collect()
-#print(rdd)
-lines  = sc.textFile("logs.log")
-line_lengths = lines.map(lambda x: len(x))
-document_length = line_lengths.reduce(lambda x,y: x+y)
-print(document_length)
+from pyspark.sql import SparkSession
+  
+spark = SparkSession.builder.appName("DataFrame").getOrCreate()
+  
+df = spark.read.text("output.txt")
+  
+df.selectExpr("split(value, ' ') as\
+Text_Data_In_Rows_Using_Text").show(4,False)
