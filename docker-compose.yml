@@ -48,6 +48,8 @@ services:
     ports:
       - '8080:8080'
       - '7077:7077'
+    volumes:
+      - ./jars_dir:/opt/bitnami/spark/ivy:z
     networks:
       net_pet:
         ipv4_address: 172.27.1.10
@@ -92,12 +94,6 @@ services:
     restart: unless-stopped
     ports:
       - 26000:27017
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
-      - MONGO_INITDB_DATABASE=cqrs
-      - MONGO_DB_USERNAME=user
-      - MONGO_DB_PASSWORD=user
     volumes:
       - ./db/mongo/data:/data/db/
       - ./log/mongo/logs:/var/log/mongodb/

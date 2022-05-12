@@ -4,3 +4,4 @@ initdb.d/
 log/
 venv/
 *.log
+jars_dir
