@@ -56,3 +56,4 @@ for msg in consumer:
 # ds = ssc.textFileStream("logfiles.log")
 
 # ds.map(lambda x: print(x))
+
