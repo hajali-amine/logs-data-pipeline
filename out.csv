@@ -1,3 +1,4 @@
+country,date,api,status,bytes,referer,time
 ch,27/Dec/2037:12:00:00,DELETE/usr/admin,502,4963,-,45
 fr,27/Dec/2037:12:00:00,GET/usr/admin/developer,200,5041,http://www.parker-miller.org/tag/list/list/privacy/,3885
 tl,27/Dec/2037:12:00:00,POST/usr/register,404,5028,-,3350

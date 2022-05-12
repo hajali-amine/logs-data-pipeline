@@ -1,5 +1,4 @@
-bson
-pymongo
-pyspark
-kafka-python
-pandas
+install==1.3.5
+kafka-python==2.0.2
+py4j==0.10.9.3
+pyspark==3.2.1
