@@ -14,6 +14,6 @@ def country():
     return data
 
 @app.route("/api")
-def country():
+def api():
     data = jsonify(list(api_stat_collection.find({}, {"_id":0})))
     return data
