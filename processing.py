@@ -23,9 +23,11 @@ size = df_data.count()
 df_country_count = df_data.groupBy("country").count().withColumn("percent", F.col("count") / size)
 country_records = df_country_count.toPandas().to_dict(orient="records")
 country_stat_collection.insert_many(country_records)
+print("country stats persisted")
 
 # Get the min, max and avg response time per api and store it to a collection named 'api' in Mongo
 df_api_perf_eval = df_data.groupBy("api").agg(F.min("time"), F.max("time"), F.avg("time"))\
     .withColumnRenamed("avg(time)", "avg").withColumnRenamed("min(time)", "min").withColumnRenamed("max(time)", "max")
 api_records = df_api_perf_eval.toPandas().to_dict(orient="records")
 api_stat_collection.insert_many(api_records)
+print("api stats persisted")

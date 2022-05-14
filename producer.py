@@ -7,6 +7,7 @@ logs = open("logfiles.log", "r")
 # Append every line in the logfiles.log file to the Kafka topic 'log'
 for line in logs:
     producer.send('log', str.encode(line))
+    print(f"line sent - [{line}]")
 
 logs.close()
 producer.flush()
