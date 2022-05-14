@@ -11,3 +11,5 @@ api_stat_collection = db["api"]
 collection.delete_many({})
 country_stat_collection.delete_many({})
 api_stat_collection.delete_many({})
+
+print("DB purged")
