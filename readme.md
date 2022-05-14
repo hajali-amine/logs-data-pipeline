@@ -47,6 +47,7 @@ Now we have our stats in Mongo, let's run the flask app! Let's run the following
 
 And your flask app is running! Next thing is to run the Angular dashboard. Open an another terminal and;
 
+`cd dashboard`
 `npm install`
 `npm start`
 
