@@ -1,4 +1,4 @@
-# Data Pipeline
+# Logs Data Pipeline
 
 This project consists of implementing a data pipeline. The goal of our pipeline is to bring insights from the logs of deployed microservices.
 Since we didn't really implement, nor deployed microservices, we will simulate these logs using the following [Kaggle dataset](https://www.kaggle.com/datasets/vishnu0399/server-logs?select=logfiles.log). 
