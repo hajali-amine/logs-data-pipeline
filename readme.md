@@ -9,7 +9,7 @@ Since we didn't really implement, nor deployed microservices, we will simulate t
   <img src="./assets/archi.png" alt="architecture" />
 </p>
 
-The process is simple, each log line will be sent to a __Kafka topic__. We'll have a __Spark Streaming__ process that takes each line of log from Kafka and cleans it - taking the IP address and extracting the country from it, cleans strings, drop useless information, etc. The cleaned data then will be stored to __MongoDB__. There's a __Spark Batch__ process that will get all of the data from MongoDB and get insight - the possibilities are endless - we extracted two insights; one related to APIs' response time and the other related to distribution countries when it comes to sending requests. These informations are stored in __MongoDB__ to be consumed by __Flask__ when the __Angular dashboad__ fetches the data.
+The process is simple, each log line will be sent to a __Kafka topic__. We'll have a __Spark Streaming__ process that takes each line of log from Kafka and cleans it - taking the IP address and extracting the country from it, trimming edges of strings, droping useless information, etc. The cleaned data then will be stored to __MongoDB__. There's a __Spark Batch__ process that will get all of the data from MongoDB and generate stats - the possibilities are endless. In our case, we extracted two stats; one related to APIs' response time and the other related to the distribution of countries when it comes to sending requests. These informations are stored in __MongoDB__ to be consumed by a __Flask__ API when the __Angular dashboad__ fetches the data.
 
 ## How to run the project
 
@@ -42,13 +42,17 @@ To run the Spark Batch process;
 Now we have our stats in Mongo, let's run the flask app! Let's run the following;
 
 `cd api`
+
 `export FLASK_APP=api`
+
 `flask run`
 
 And your flask app is running! Next thing is to run the Angular dashboard. Open an another terminal and;
 
 `cd dashboard`
+
 `npm install`
+
 `npm start`
 
 You should be met with the following interface;
