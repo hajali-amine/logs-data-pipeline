@@ -63,4 +63,8 @@ You should be met with the following interface;
 
 __Now I know that it's not the best UI in the world, but it's honest work...__
 
+In order to purge all of the data on MongoDB, just run;
+
+`python3 purge.py`
+
 ### And that's all folks, I hope you enjoyed the project!
