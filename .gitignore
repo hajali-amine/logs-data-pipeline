@@ -3,7 +3,7 @@ db/
 initdb.d/
 log/
 venv/
-*.log
+logfiles.log
 jars_dir
 _pycache_/
 
